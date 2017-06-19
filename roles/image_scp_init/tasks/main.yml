@@ -1,0 +1,26 @@
+---
+- name: Make compute directory
+  file: path=/{{ user }}/automation/{{ item }} state=directory
+  with_items:
+    - im_scp
+
+#- name: Copy lxc install shell
+#  copy: src=lxc.sh dest=/{{ user }}/automation/im_scp/lxc.sh owner={{ user }} mode=0755
+#  when: ansible_distribution == "Ubuntu"
+
+#- name: install lxc
+#  shell: "sh /{{ user }}/automation/im_scp/lxc.sh"
+#  when: ansible_distribution == "Ubuntu"
+
+- name: copy tca-image-scp
+  copy: src=tca-image-scp dest=/etc/init.d/tca-image-scp
+
+- name: Copy setting shell
+  copy: src=setting.sh dest=/{{ user }}/automation/im_scp/setting.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Setting shell
+  shell: "nohup /{{ user }}/automation/im_scp/setting.sh"
+  when: ansible_distribution == "Ubuntu"
+
+

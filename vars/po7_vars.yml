@@ -1,0 +1,17 @@
+---
+user: root
+user_home: root 
+java_version: "java8_64"
+java_home: "/usr/{{ java_version }}"
+jeus_home: "/{{ user_home }}/jeus8"
+ansi_path: "{{ (ansible_env|default({})).PATH|default('') }}"
+remote_os_name: "{{ ansible_system }}"
+remote_os_arch: "{{ ansible_architecture }}"
+### install option ######################################
+#build_version: b006 # b006, b007
+nodes_type: java # java, ssh
+bitz: x64 # x86, x64
+### po7 var #############################################
+po_home: "/{{ user_home }}/proobject7"
+#po7_runtime_binary: "proobject-runtime-war-7.0.0.0.248.war"
+po7_runtime_binary: "po7.war"

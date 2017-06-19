@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dbio-config xmlns="http://www.tmax.co.kr/proobject/dbio-config">
+	<connection-info>
+		<datasources>
+			<pairDataSource alias="tibero6">
+				<non-XA-datasource jndi_name="tibero6" />
+				<XA-datasource jndi_name="tibero6" />
+			</pairDataSource>
+		</datasources>
+		<async-jdbc conn_name="tibero6" dbname="tibero" userid="impadmin" passwd="cloudi1" ip="192.168.53.240" port="8629" />
+	</connection-info>
+</dbio-config>

@@ -1,0 +1,7 @@
+---
+
+- name: untar webcontent
+  unarchive: src=binary/WebContent.tar dest=/{{ user }}/webtob/docs
+
+- name: Run webtob
+  shell: wsboot

@@ -1,0 +1,9 @@
+---
+
+- name: Setting host network clear
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - network_setting_clear

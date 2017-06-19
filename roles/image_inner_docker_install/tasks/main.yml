@@ -1,0 +1,31 @@
+---
+
+# setting docker install shell & update & install docker 
+- name: Copy docker install shell centos
+  copy: src=docker_install_centos.sh dest=/{{ user }}/automation/initial/docker_install.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "CentOS"
+
+- name: Copy docker install shell on ubuntu
+  copy: src=docker_install_ubuntu.sh dest=/{{ user }}/automation/initial/docker_install.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Execute docker install shell <update & install docker>
+  shell: /{{ user }}/automation/initial/docker_install.sh 2>&1 | tee /{{ user }}/automation/log/progress
+
+# setting modified docker binaries
+- name: Make docker binary directory
+  file: path=/{{ user }}/automation/initial/{{ item }} state=directory
+  with_items:
+    - docker_binary
+
+- name: Copy modified docker binaries
+  copy: src=binary/docker_binary.tar dest=/{{ user }}/automation/initial/docker_binary.tar owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Copy unarchive_setting.sh
+  copy: src=unarchive_setting.sh dest=/{{ user }}/automation/initial owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Unarchive docker binary tar & modify
+  shell: /{{ user }}/automation/initial/unarchive_setting.sh 2>&1 >> /{{ user }}/automation/log/progress
+  when: ansible_distribution == "Ubuntu"

@@ -1,0 +1,26 @@
+---
+- name: Make compute directory
+  file: path=/{{ user }}/automation/{{ item }} state=directory
+  with_items:
+    - storage_init
+
+#- name: Copy lxc install shell
+#  copy: src=lxc.sh dest=/{{ user }}/automation/storage_init/lxc.sh owner={{ user }} mode=0755
+#  when: ansible_distribution == "Ubuntu"
+
+#- name: install lxc
+#  shell: "sh /{{ user }}/automation/storage_init/lxc.sh"
+#  when: ansible_distribution == "Ubuntu"
+
+- name: copy tca-storage file
+  copy: src=tca-storage dest=/etc/init.d/tca-storage
+
+- name: Copy setting shell
+  copy: src=setting.sh dest=/{{ user }}/automation/storage_init/setting.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Setting shell
+  shell: "sh /{{ user }}/automation/storage_init/setting.sh"
+  when: ansible_distribution == "Ubuntu"
+
+

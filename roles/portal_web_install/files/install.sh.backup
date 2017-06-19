@@ -1,0 +1,47 @@
+#!/bin/bash
+
+expect << EOF
+	set timeout -1
+	spawn sh -c "/root/automation/portal_web/WEBTOB5_0_SP0_Fix0_LinuxK2_6_x64.bin > log"
+		expect -re "PRESS <ENTER> TO CONTINUE:" {
+			send "\r"
+			exp_continue
+		} -re "LICENSE Agreement:" {
+            send "\r"
+            exp_continue
+        } -re "PRESS <ENTER> TO CONTINUE:" {
+			send "\r"
+			exp_continue
+		} -re "PRESS <ENTER> TO CONTINUE:" {
+			send "\r"
+			exp_continue
+		} -re "DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N):" {
+			send "Y\r"
+			exp_continue
+		} -re "DEFAULT" {
+			send "1\r"
+			exp_continue"
+		} -re "DEFAULT" {
+			send "\r"
+		} -re "PRESS <ENTER> TO CONTINUE:" {
+			send "\r"
+		} -re "PRESS <ENTER> TO INSTALL:" {
+			send "\r"
+		} -re "PRESS <ENTER> TO CONTINUE:" {
+			send "\r"
+		} -re "PRESS <ENTER> TO EXIT THE INSTALLER:" {
+			send "\r"
+		}
+	expect eof 
+EOF
+#expect << EOF
+#    spawn sudo sh -c "ssh-copy-id -i /root/.ssh/id_rsa.pub root@'$host_ip' > temp"
+#        expect -re "(yes/no)" {
+#            send "yes\r"
+#            exp_continue
+#        } -re "password:" {
+#            send "tmax\r"
+#        }
+#    
+#    expect eof
+#EOF

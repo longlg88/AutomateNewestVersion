@@ -1,0 +1,10 @@
+---
+- name: Clear bridge setting for I1 model
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  environment:
+    SETTING_INTERFACE: '{{ SETTING_INTERFACE }}'
+  roles:
+    - bridge_clear

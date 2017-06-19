@@ -1,0 +1,17 @@
+---
+- name: Init ansible home
+  hosts: '{{ hosts }}'
+ 
+- name: RUN IaaS run
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/po7_vars.yml"
+    - "../vars/iaas_domain-config.yml"
+#    - "../vars/portal_server_domain-config.yml"
+  environment:
+    PATH: "{{ jeus_home }}/bin:{{ jeus_home }}/lib:{{ ansi_path }}"
+    PROOBJECT_HOME: "{{ po_home }}"
+
+  roles:
+    - iaas_run

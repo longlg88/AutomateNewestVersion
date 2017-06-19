@@ -1,0 +1,11 @@
+---
+## Initial value
+user: root
+user_home: /root
+host_ip: 192
+host_pw: root!!23
+SETTING_IP: 192.168.201.40
+SETTING_NETMASK: 255.255.255.0
+SETTING_GATEWAY: 192.168.201.1
+SETTING_GATEWAY_NET: 192.168.201.0/24
+SETTING_INTERFACE: enp0s025

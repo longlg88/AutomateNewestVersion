@@ -1,0 +1,8 @@
+---
+- name: TCNM install
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - docker_tcnm_install

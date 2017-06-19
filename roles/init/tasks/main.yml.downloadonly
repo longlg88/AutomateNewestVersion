@@ -1,0 +1,9 @@
+---
+- name: Copy initialize shell
+  copy: src=init_ubuntu.sh dest=/{{ user }}/init.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Execute initialize shell
+  shell: /{{ user }}/init.sh 
+  when: ansible_distribution == "Ubuntu"
+

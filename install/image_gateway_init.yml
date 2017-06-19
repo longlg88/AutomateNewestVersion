@@ -1,0 +1,10 @@
+---
+
+- name: Setting image gateway host
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+
+  roles:
+    - image_gateway_init

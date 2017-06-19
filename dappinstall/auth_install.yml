@@ -1,0 +1,9 @@
+---
+
+- name: Auth install
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - auth_install

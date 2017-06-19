@@ -1,0 +1,23 @@
+---
+- name: install lxc
+  shell: apt-get -y install lxc
+
+- name: copy gen bridge setting shell
+  copy: src=gen_iaaslite.sh dest={{ user_home }}/automation mode=0755
+
+- name: copy find & change ip shell
+  copy: src=find_change_ip.sh dest={{ user_home }}/automation mode=0755
+
+- name: execute find & change ip shell
+  shell: nohup {{ user_home }}/automation/find_change_ip.sh >> log
+
+- name: gen bridge setting
+  shell: "nohup {{ user_home }}/automation/gen_iaaslite.sh >> log"
+
+- name: chmod 755 
+  shell: chmod 755 {{ user_home }}/iaaslite.sh
+
+#- name: execute shell
+#  shell: "nohup {{ user_home }}/iaaslite.sh >> log"
+#  become: true
+#  become_method: su

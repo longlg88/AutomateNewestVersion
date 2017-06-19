@@ -1,0 +1,12 @@
+---
+- name: copy gen bridge clear setting shell
+  copy: src=gen_iaasclear.sh dest={{ user_home }}/automation mode=0755
+
+- name: gen bridge clear
+  shell: "nohup {{ user_home }}/automation/gen_iaasclear.sh >> log"
+
+- name: chmod 755
+  shell: chmod 755 {{ user_home }}/iaasclear.sh
+
+- name: execute shell
+  shell: "nohup {{ user_home }}/iaasclear.sh >> log"

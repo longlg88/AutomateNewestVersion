@@ -1,0 +1,59 @@
+---
+- name: install init pkg From Ubuntu
+  apt:
+    name: '{{ item }}'
+  when: ansible_distribution == "Ubuntu"
+  register: utpkg_result
+  with_items:
+    - "gcc"
+    - "g++"
+    - "libstdc++5"
+    - "libaio1"
+    - "libaio-dev"
+
+- name: install init pkg from CentOS
+  yum:
+    name: "{{ item }}"
+  when: ansible_distribution == "CentOS"
+  register: copkg_result
+  with_items:
+    - "gcc"
+    - "gcc-c++"
+    - "compat-libstdc++-33"
+    - "libaio"
+    - "libaio-devel"
+
+- name: Make main recursive directory(DB)
+  file: path=/{{ user }}/automation/{{ item }} state=directory
+  with_items:
+    - db_files
+    - temp
+
+- name: make directory
+  file: path={{ java_home }} state=directory
+
+- name: make temp directory
+  file: path=/{{ user }}/automation/temp/ state=directory
+
+- name: gtar java
+  unarchive:
+    extra_opts="--strip-components=1"
+    src=java/{{ java_version }}/jdk-8u121-linux-x64.tar.gz
+    dest={{ java_home }}
+  with_fileglob:
+    - java/{{ java_version }}/*
+
+- name: copy tar
+  copy: src=java/{{ java_version }}/jdk-8u121-linux-x64.tar.gz dest=/{{ java_home }}/ owner={{ user }} mode=0755
+
+
+- name: untar
+  unarchive:
+    src=java/{{ java_version }}/jdk-8u121-linux-x64.tar.gz
+    dest=/{{ user }}/automation/temp/
+
+- name: correct java version selected
+  alternatives:
+    name: java
+    path: "{{ java_home }}/bin/java"
+    link: /usr/bin/java

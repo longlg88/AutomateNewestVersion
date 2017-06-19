@@ -1,0 +1,9 @@
+---
+- name: Portal install
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+
+  roles:
+    - docker_portal_web_install

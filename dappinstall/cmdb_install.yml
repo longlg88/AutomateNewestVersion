@@ -1,0 +1,8 @@
+---
+- name: CMDB install
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - cmdb_install

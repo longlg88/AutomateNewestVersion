@@ -1,0 +1,35 @@
+---
+- name: Make image gateway directory
+  file: path=/{{ user }}/automation/{{ item }} state=directory
+  with_items:
+    - im_gateway
+
+- name: copy tca-compute file
+  copy: src=tca-image-gateway dest=/etc/init.d/tca-image-gateway
+
+- name: Copy setting shell
+  copy: src=setting.sh dest=/{{ user }}/automation/im_gateway/setting.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Setting shell
+  shell: "nohup /{{ user }}/automation/im_gateway/setting.sh"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Make Image gateway directory 
+  file: path=/var/lib/docker/tmp/image_layer_docker state=directory
+  
+- name: Make Image gate & node
+  file: path=/{{ user }}/{{ item }} state=directory
+  with_items:
+    - tca_agent
+
+- name: Make Image gate & node cont.
+  file: path=/{{ user }}/tca_agent/{{ item }} state=directory
+  with_items:
+    - import_tar
+    - scp_storage_ref
+    - scp_storage_tar
+    - image_layer_docker
+
+- name: symbolic link to image_layer_docker
+  shell: ln -s /var/lib/docker/tmp/image_layer_docker /{{ user }}/tca_agent/image_layer_docker

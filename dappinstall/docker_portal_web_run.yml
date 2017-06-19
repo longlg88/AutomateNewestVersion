@@ -1,0 +1,12 @@
+---
+- name: Portal run
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  environment:
+    PORTAL_WEB_IMAGE_IP: '{{ portal_web_image_ip }}'
+    PORTAL_WEB_PORT_1: '{{ portal_web_port_1 }}'
+    PORTAL_WEB_PORT_2: '{{ portal_web_port_2 }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - docker_portal_web_run

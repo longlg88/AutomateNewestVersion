@@ -1,0 +1,11 @@
+---
+- name: Copy make wsconfig file shell
+  copy: src=httpm.sh dest=/{{ user }}/automation/portal_web/ owner={{ user }} mode=0755
+
+- name: Execute make wsconfig file shell
+  shell: "nohup /{{ user }}/automation/portal_web/httpm.sh"
+  args:
+    warn: no
+    executable: "/bin/bash"
+  register: wsconfig_reg
+  failed_when: "'Exception' in wsconfig_reg.stdout"

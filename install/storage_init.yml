@@ -1,0 +1,10 @@
+---
+
+- name: Setting storage
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+
+  roles:
+    - storage_init

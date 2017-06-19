@@ -1,0 +1,17 @@
+---
+- name: Portal PO7 server run
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  environment:
+    TIBERO_IP: '{{ t_ip }}'
+    TIBERO_PORT: '{{ tport }}'
+    TIBERO_USER: '{{ portaltid }}'
+    TIBERO_PW: '{{ portaltpw }}'
+    DOMAINNAME: '{{ domain_name }}'
+    PORTAL_SERVER_PORT_1: '{{ portal_server_port_1 }}'
+    PORTAL_SERVER_PORT_2: '{{ portal_server_port_2 }}'
+    PORTAL_IMAGE_NAME: '{{ portal_image_name }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - docker_portal_server_run

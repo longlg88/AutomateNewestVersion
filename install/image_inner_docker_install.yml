@@ -1,0 +1,11 @@
+---
+- name: Install docker binary (by Minho)
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  environment:
+    insecure_ip: '{{ insecure_ip }}'
+
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - image_inner_docker_install

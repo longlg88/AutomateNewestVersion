@@ -1,0 +1,17 @@
+---
+- name: CMDB server run
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  environment:
+    TIBERO_IP: '{{ t_ip }}'
+    TIBERO_PORT: '{{ tport }}'
+    TIBERO_USER: '{{ cmdbtid }}'
+    TIBERO_PW: '{{ cmdbtpw }}'
+    CMDB_SERVER_PORT_1: '{{ cmdb_server_port_1 }}'
+    CMDB_SERVER_PORT_2: '{{ cmdb_server_port_2  }}'
+    CMDB_IMAGE_NAME: '{{ cmdb_image_name }}'
+    DOMAINNAME: '{{ domain_name }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+  roles:
+    - cmdb_run

@@ -1,0 +1,26 @@
+---
+- name: Make compute directory
+  file: path=/{{ user }}/automation/{{ item }} state=directory
+  with_items:
+    - compute
+
+- name: Copy lxc install shell
+  copy: src=lxc.sh dest=/{{ user }}/automation/compute/lxc.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: install lxc
+  shell: "sh /{{ user }}/automation/compute/lxc.sh"
+  when: ansible_distribution == "Ubuntu"
+
+- name: copy tca-compute file
+  copy: src=tca-compute dest=/etc/init.d/tca-compute
+
+- name: Copy setting shell
+  copy: src=setting.sh dest=/{{ user }}/automation/compute/setting.sh owner={{ user }} mode=0755
+  when: ansible_distribution == "Ubuntu"
+
+- name: Setting shell
+  shell: "sh /{{ user }}/automation/compute/setting.sh"
+  when: ansible_distribution == "Ubuntu"
+
+

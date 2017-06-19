@@ -1,0 +1,5 @@
+---
+
+- name: Copy WebToB license
+  copy: src=license.dat dest=/{{ user }}/webtob/license/ owner={{ user }} mode=0644
+

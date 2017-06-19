@@ -1,0 +1,10 @@
+MasterUser=root
+MasterPassword=tmax@23
+MasterIp=175.195.163.15
+MasterSvcPort=8080
+MasterSshPort=22
+
+imageStorageIp=175.196.163.13
+imageStoragePw=tmax@23
+storageLocation=175.195.163.15
+storageAuth=root:tmax@23

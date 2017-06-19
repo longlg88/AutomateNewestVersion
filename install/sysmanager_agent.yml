@@ -1,0 +1,18 @@
+---
+
+- name: Setting sysmanager agent
+  hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  environment:
+    TMAX_SYSMANAGER_PORT: '{{ TMAX_SYSMANAGER_PORT }}'
+    TMAX_SYSMANAGER_IP: '{{ TMAX_SYSMANAGER_IP }}'
+    TMAX_SYSMANAGER_AGENT_PORT: '{{ TMAX_SYSMANAGER_AGENT_PORT }}'
+    TMAX_CLOUD_NODE_ID: '{{ TMAX_CLOUD_NODE_ID }}'
+    TMAX_SYSMANAGER_AGENT_ANYMINER_PORT: '{{ TMAX_SYSMANAGER_AGENT_ANYMINER_PORT }}'
+    TMAX_SYSMANAGER_AGENT_ANYMINER_IP: '{{ TMAX_SYSMANAGER_AGENT_ANYMINER_IP }}'
+    TMAX_SYSMANAGER_AGENT_CONTAINER_RW_LAYER_DIRECTORY: '{{ TMAX_SYSMANAGER_AGENT_CONTAINER_RW_LAYER_DIRECTORY }}'
+  vars_files:
+    - "../vars/external_vars.yml"
+
+  roles:
+    - sysmanager_agent
